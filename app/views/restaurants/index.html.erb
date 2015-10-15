@@ -8,6 +8,8 @@
         <li>
           <%= review.thoughts %>, <strong><%= review.rating %></strong>/5
           <%= time_ago_in_words(review.created_at) %> ago
+          <p><%= pluralize review.endorsements.count, 'endorsement' %> </p>
+          <%= link_to "Endorse Review", new_review_endorsement_path(review) %>
         </li>
       <% end %>
     </ul>

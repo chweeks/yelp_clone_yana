@@ -1,8 +1,8 @@
 class EndorsementsController < ApplicationController
 
-  def create
+  def new
     @review = Review.find(params[:review_id])
-    @review.endorsments.create
-    redirect_to restaurant_path
+    @review.endorsements.create
+    redirect_to restaurants_path
   end
 end
