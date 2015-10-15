@@ -37,4 +37,12 @@ feature 'reviewing' do
     expect(page).to have_content('Average Rating: ★★★★☆')
   end
 
+  scenario 'displays time ago for reviews' do
+    leave_review('So so', '3')
+    click_link('Sign out')
+    sign_up(user2)
+    leave_review('Great', '5')
+    expect(page).to have_content('less than a minute ago')
+  end
+
 end
