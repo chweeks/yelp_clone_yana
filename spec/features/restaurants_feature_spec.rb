@@ -56,8 +56,8 @@ feature 'restaurants' do
           expect(page).to have_content 'error'
         end
       end
-    end
 
+    end
   end
 
   context 'viewing restaurants' do
