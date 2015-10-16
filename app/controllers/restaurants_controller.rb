@@ -5,7 +5,6 @@ class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
     @reviews = Review.all
-    # raise 'Hello from the Index action'
   end
 
   def new
@@ -27,7 +26,7 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name)
+    params.require(:restaurant).permit(:name, :image)
   end
 
   def show
@@ -39,27 +38,24 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-      @restaurant = Restaurant.find(params[:id])
-      if current_user.id == @restaurant.user_id
-        @restaurant.update(restaurant_params)
-        redirect_to restaurants_path
-        flash[:notice] = 'Restaurant updated successfully'
-      else
-        redirect_to restaurants_path, alert: "You can't edit other users restaurants"
-      end
+    @restaurant = Restaurant.find(params[:id])
+    if current_user.id == @restaurant.user_id
+      @restaurant.update(restaurant_params)
+      redirect_to restaurants_path
+      flash[:notice] = 'Restaurant updated successfully'
+    else
+      redirect_to restaurants_path, alert: "You can't edit other users restaurants"
+    end
   end
 
   def destroy
-      @restaurant = Restaurant.find(params[:id])
-      if current_user.id == @restaurant.user_id
-        @restaurant.destroy
-        flash[:notice] = 'Restaurant deleted successfully'
-        redirect_to restaurants_path
-      else
-        redirect_to restaurants_path, alert: "You can't delete other users restaurants"
-      end
+    @restaurant = Restaurant.find(params[:id])
+    if current_user.id == @restaurant.user_id
+      @restaurant.destroy
+      flash[:notice] = 'Restaurant deleted successfully'
+      redirect_to restaurants_path
+    else
+      redirect_to restaurants_path, alert: "You can't delete other users restaurants"
+    end
   end
-
-
-
 end
